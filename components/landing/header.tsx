@@ -3,12 +3,15 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import { useAuth, UserButton } from "@clerk/nextjs";
 
 interface HeaderProps {
   className?: string;
 }
 
 export function Header({ className = "" }: HeaderProps) {
+  const { isLoaded, userId } = useAuth();
+
   return (
     <header className={`w-full border-b bg-white dark:bg-background-dark-custom ${className}`}>
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -50,17 +53,34 @@ export function Header({ className = "" }: HeaderProps) {
           </a>
         </nav>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons / User Menu */}
         <div className="hidden md:flex items-center gap-3">
-          <Button variant="outline" asChild>
-            <Link href="/login">Login</Link>
-          </Button>
-          <Button
-            asChild
-            className="bg-[#20df6c] hover:bg-[#1bc75f] text-white"
-          >
-            <Link href="/onboarding">Start Your Free Trial</Link>
-          </Button>
+          {!isLoaded ? (
+            // Show nothing while loading to prevent layout shift
+            <div className="w-32 h-10" />
+          ) : userId ? (
+            // Show user button when authenticated
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "w-10 h-10",
+                },
+              }}
+            />
+          ) : (
+            // Show login buttons when not authenticated
+            <>
+              <Button variant="outline" asChild>
+                <Link href="/sign-in">Login</Link>
+              </Button>
+              <Button
+                asChild
+                className="bg-[#20df6c] hover:bg-[#1bc75f] text-white"
+              >
+                <Link href="/sign-in">Start Your Free Trial</Link>
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Icon */}
