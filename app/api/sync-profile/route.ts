@@ -38,7 +38,7 @@ export async function POST() {
           onConflict: "user_id",
         }
       )
-      .select()
+      .select("user_id, email, onboarding_completed, onboarding_completed_at, created_at, last_activity")
       .single();
 
     if (error) {

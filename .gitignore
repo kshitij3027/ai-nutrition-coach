@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+*.sql
 
 # debug
 npm-debug.log*
@@ -43,5 +44,6 @@ next-env.d.ts
 # project specific
 /.agent
 /requirements
+/supabase
 CLAUDE.md
 /.claude
