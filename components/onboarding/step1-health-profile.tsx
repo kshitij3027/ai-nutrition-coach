@@ -74,7 +74,7 @@ export function Step1HealthProfile({
       target_weight_kg: defaultValues?.target_weight_kg ?? null,
       activity_level: defaultValues?.activity_level,
       consent_given: defaultValues?.consent_given ?? false,
-      unit_system: unitSystem,
+      unit_system: unitSystem ?? 'metric',
     },
   })
 
@@ -214,7 +214,7 @@ export function Step1HealthProfile({
               value={currentAge ?? ""}
               onChange={(e) => {
                 const value = e.target.value
-                setValue("age", value === "" ? undefined : Number(value), { shouldValidate: true })
+                setValue("age", (value === "" ? undefined : Number(value)) as number, { shouldValidate: true })
               }}
               aria-invalid={!!errors.age}
               disabled={isLoading}
@@ -298,7 +298,7 @@ export function Step1HealthProfile({
                   value={currentHeightCm ?? ""}
                   onChange={(e) => {
                     const value = e.target.value
-                    setValue("height_cm", value === "" ? undefined : Number(value), { shouldValidate: true })
+                    setValue("height_cm", (value === "" ? undefined : Number(value)) as number, { shouldValidate: true })
                   }}
                   aria-invalid={!!errors.height_cm}
                   disabled={isLoading}
@@ -360,7 +360,7 @@ export function Step1HealthProfile({
                   value={currentWeightKg ?? ""}
                   onChange={(e) => {
                     const value = e.target.value
-                    setValue("weight_kg", value === "" ? undefined : Number(value), { shouldValidate: true })
+                    setValue("weight_kg", (value === "" ? undefined : Number(value)) as number, { shouldValidate: true })
                   }}
                   aria-invalid={!!errors.weight_kg}
                   disabled={isLoading}
@@ -414,7 +414,7 @@ export function Step1HealthProfile({
                   value={currentTargetWeightKg ?? ""}
                   onChange={(e) => {
                     const value = e.target.value
-                    setValue("target_weight_kg", value === "" ? undefined : Number(value), { shouldValidate: true })
+                    setValue("target_weight_kg", (value === "" ? undefined : Number(value)) as number | undefined, { shouldValidate: true })
                   }}
                   aria-invalid={!!errors.target_weight_kg}
                   disabled={isLoading}

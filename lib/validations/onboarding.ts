@@ -13,7 +13,7 @@ export const healthProfileSchema = z.object({
     .max(120, 'Please enter a valid age'),
 
   biological_sex: z.enum(['male', 'female', 'other'], {
-    required_error: 'Please select your biological sex',
+    message: 'Please select your biological sex',
   }),
 
   height_cm: z.number()
@@ -40,7 +40,7 @@ export const healthProfileSchema = z.object({
     'very_active',
     'extremely_active'
   ], {
-    required_error: 'Please select your activity level',
+    message: 'Please select your activity level',
   }),
 
   consent_given: z.boolean()
@@ -49,7 +49,7 @@ export const healthProfileSchema = z.object({
     }),
 
   // UI only field for unit toggle
-  unit_system: z.enum(['metric', 'imperial']).default('metric'),
+  unit_system: z.enum(['metric', 'imperial']),
 });
 
 export type HealthProfileFormData = z.infer<typeof healthProfileSchema>;
@@ -81,11 +81,11 @@ export const dietaryRestrictionsSchema = z.object({
       allergen_name: z.string().min(1, 'Allergen name is required'),
       severity_level: z.enum(['severe', 'moderate', 'intolerance']),  // Matches DB column
     })
-  ).default([]),
+  ),
 
-  diet_types: z.array(z.string()).default([]),
+  diet_types: z.array(z.string()),
 
-  custom_restrictions: z.array(z.string()).default([]),
+  custom_restrictions: z.array(z.string()),
 
   confirmation_given: z.boolean()
     .refine((val) => val === true, {

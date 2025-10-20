@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { useUser } from "@clerk/nextjs"
 
 import { Step3DietaryPreferences } from "@/components/onboarding/step3-dietary-preferences"
+import { type AllergySeverity } from "@/lib/types/onboarding"
 
 /**
  * Onboarding Step 3: Dietary Preferences
@@ -19,7 +20,7 @@ export default function OnboardingStep3Page() {
   const [isLoading, setIsLoading] = React.useState(false)
   const [isFetching, setIsFetching] = React.useState(true)
   const [existingData, setExistingData] = React.useState<{
-    allergies?: { allergen_name: string; severity_level: string }[]
+    allergies?: { allergen_name: string; severity_level: AllergySeverity }[]
     diet_types?: string[]
     custom_restrictions?: string[]
     confirmation_given?: boolean
@@ -86,7 +87,7 @@ export default function OnboardingStep3Page() {
 
   // Handle form submission
   async function handleSubmit(formData: {
-    allergies: { allergen_name: string; severity_level: string }[]
+    allergies: { allergen_name: string; severity_level: AllergySeverity }[]
     diet_types: string[]
     custom_restrictions: string[]
   }) {

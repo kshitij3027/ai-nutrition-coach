@@ -93,9 +93,7 @@ export function DietTypeSelector({
         {DIET_TYPE_OPTIONS.map((dietType) => {
           const isSelected = isDietTypeSelected(dietType.name);
           // Dynamically get the Lucide icon component
-          const Icon = (Icons as Record<string, React.ComponentType<{ className?: string }>>)[
-            dietType.icon
-          ];
+          const Icon = (Icons as unknown as Record<string, React.ComponentType<{ className?: string }>>)[dietType.icon];
 
           return (
             <Card

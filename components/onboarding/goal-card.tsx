@@ -22,7 +22,7 @@ export function GoalCard({
   onToggle,
 }: GoalCardProps) {
   // Dynamically get the Lucide icon component
-  const Icon = (Icons as Record<string, React.ComponentType<{ className?: string }>>)[iconName];
+  const Icon = (Icons as unknown as Record<string, React.ComponentType<{ className?: string }>>)[iconName];
 
   return (
     <Card
