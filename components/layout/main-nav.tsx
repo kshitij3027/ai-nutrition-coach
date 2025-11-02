@@ -21,7 +21,7 @@ const navItems = [
     icon: LayoutDashboard,
   },
   {
-    href: "/daily-log",
+    href: "/meal-log",
     label: "Daily Log",
     icon: Calendar,
   },
@@ -42,7 +42,7 @@ export function MainNav() {
       <nav className="hidden md:flex items-center gap-1">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = pathname === item.href;
+          const isActive = pathname === item.href || pathname?.startsWith(item.href);
 
           return (
             <Link key={item.href} href={item.href}>
@@ -77,7 +77,7 @@ export function MainNav() {
           <nav className="flex flex-col gap-4 mt-6">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href;
+              const isActive = pathname === item.href || pathname?.startsWith(item.href);
 
               return (
                 <Link

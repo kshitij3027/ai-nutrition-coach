@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 
 export function SyncProfile() {
   const router = useRouter();
-  const [isChecking, setIsChecking] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [_isChecking, setIsChecking] = useState(true);
+  const [_error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const syncProfileAndCheckOnboarding = async () => {

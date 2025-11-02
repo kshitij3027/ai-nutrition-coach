@@ -4,7 +4,7 @@ import { SyncProfile } from "@/components/auth/sync-profile";
 import { WelcomeCard } from "@/components/dashboard/welcome-card";
 import { LogMealCard } from "@/components/dashboard/log-meal-card";
 import { TodaysTipCard } from "@/components/dashboard/todays-tip-card";
-import { ProgressSnapshot } from "@/components/dashboard/progress-snapshot";
+import { ProgressSnapshotWrapper } from "@/components/dashboard/progress-snapshot-wrapper";
 import { AskCoachButton } from "@/components/dashboard/ask-coach-button";
 import { getUserHealthGoal, getUserHealthProfile } from "@/lib/services/dashboard-data";
 import { generateNutritionTip } from "@/lib/services/openrouter";
@@ -58,7 +58,7 @@ export default async function DashboardPage() {
 
         {/* Row 3: Progress Snapshot (full width = 5 cols) */}
         <div className="lg:col-span-5">
-          <ProgressSnapshot isNewUser={false} />
+          <ProgressSnapshotWrapper />
         </div>
       </div>
 

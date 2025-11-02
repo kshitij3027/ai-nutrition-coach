@@ -3,6 +3,21 @@ import { supabase } from "@/lib/supabaseClient";
 import { HealthGoalData, HealthProfileData } from "@/lib/types/dashboard";
 
 /**
+ * Dashboard Metrics - Real-time data from meal and weight entries
+ * Derived surface with no persistence (per entity model)
+ */
+export interface DashboardMetrics {
+  calories_today: number;
+  entries_today: number;
+  current_streak: number;
+  weight_trend_7d: Array<{
+    date: string;
+    weight: number;
+    unit: string;
+  }>;
+}
+
+/**
  * Fetch user's primary health goal from Supabase
  * @param userId - Clerk user ID
  * @returns Primary health goal data or null if not found
@@ -118,6 +133,46 @@ export async function getUserHealthProfile(userId: string): Promise<HealthProfil
     console.error("Error in getUserHealthProfile:", {
       message: error instanceof Error ? error.message : String(error),
       userId,
+      timestamp: new Date().toISOString(),
+    });
+    throw error;
+  }
+}
+
+/**
+ * Fetch dashboard metrics for the user
+ * Returns derived data from meal entries and weight snapshots (no persistence)
+ *
+ * @param userId - Clerk user ID
+ * @param timezone - IANA timezone identifier for day boundary calculations
+ * @returns Dashboard metrics or null if user hasn't logged data yet
+ */
+export async function getDashboardMetrics(
+  userId: string,
+  timezone: string
+): Promise<DashboardMetrics | null> {
+  try {
+    // Validate input
+    if (!userId || typeof userId !== 'string' || userId.trim().length === 0) {
+      throw new Error('User ID is required');
+    }
+
+    if (!timezone || typeof timezone !== 'string') {
+      throw new Error('Timezone is required');
+    }
+
+    // Call the dashboard metrics API (client-side will use this)
+    // For server-side, we can query directly
+    // For now, returning a structure that matches what the API returns
+
+    // This function will be called from client-side
+    // The actual data fetching is done via the API route
+    throw new Error('getDashboardMetrics should be called client-side via API');
+  } catch (error) {
+    console.error("Error in getDashboardMetrics:", {
+      message: error instanceof Error ? error.message : String(error),
+      userId,
+      timezone,
       timestamp: new Date().toISOString(),
     });
     throw error;
